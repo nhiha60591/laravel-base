@@ -2,6 +2,7 @@
   "name": "nhiha60591/laravel-base",
   "description": "A base Laravel package for beginner team",
   "type": "library",
+  "license": "MIT",
   "require": {
     "php": ">=7.4",
     "phpunit/phpunit": "^9.5",

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nhiha60591\LaravelBase\Commands;
+namespace Nhiha60591\LaravelBase;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -78,7 +78,7 @@ abstract class Generator
     {
         $path = config('lr-base.generator.stubsOverridePath', __DIR__);
 
-        if(!file_exists($path . '/Stubs/' . $this->stub . '.stub')){
+        if (!file_exists($path . '/Stubs/' . $this->stub . '.stub')) {
             $path = __DIR__;
         }
 
@@ -93,8 +93,8 @@ abstract class Generator
     public function getReplacements()
     {
         return [
-            'class'          => $this->getClass(),
-            'namespace'      => $this->getNamespace(),
+            'class' => $this->getClass(),
+            'namespace' => $this->getNamespace(),
             'root_namespace' => $this->getRootNamespace()
         ];
     }
@@ -137,7 +137,7 @@ abstract class Generator
         return Str::studly(str_replace(' ', '/', ucwords(str_replace('/', ' ', $name))));
     }
 
-   /**
+    /**
      * Get application namespace
      *
      * @return string
@@ -157,7 +157,6 @@ abstract class Generator
         return Str::studly(class_basename($this->getName()));
     }
 
-
     /**
      * Get paths of namespace.
      *
@@ -167,7 +166,6 @@ abstract class Generator
     {
         return explode('/', $this->getName());
     }
-
 
     /**
      * Get root namespace.
@@ -183,38 +181,17 @@ abstract class Generator
      * Get class-specific output paths.
      *
      * @param $class
-     *
+     * @param bool $directoryPath
      * @return string
      */
     public function getConfigGeneratorClassPath($class, $directoryPath = false)
     {
         switch ($class) {
             case ('models' === $class):
-                $path = config('lr-base.generator.paths.models', 'Entities');
-                break;
-            case ('repositories' === $class):
-                $path = config('lr-base.generator.paths.repositories', 'Repositories');
-                break;
-            case ('interfaces' === $class):
-                $path = config('lr-base.generator.paths.interfaces', 'Repositories');
-                break;
-            case ('presenters' === $class):
-                $path = config('lr-base.generator.paths.presenters', 'Presenters');
-                break;
-            case ('transformers' === $class):
-                $path = config('lr-base.generator.paths.transformers', 'Transformers');
-                break;
-            case ('validators' === $class):
-                $path = config('lr-base.generator.paths.validators', 'Validators');
+                $path = config('lr-base.generator.paths.models', 'Models');
                 break;
             case ('controllers' === $class):
                 $path = config('lr-base.generator.paths.controllers', 'Http\Controllers');
-                break;
-            case ('provider' === $class):
-                $path = config('lr-base.generator.paths.provider', 'lr-baseServiceProvider');
-                break;
-            case ('criteria' === $class):
-                $path = config('lr-base.generator.paths.criteria', 'Criteria');
                 break;
             default:
                 $path = '';
@@ -291,7 +268,7 @@ abstract class Generator
     /**
      * Determinte whether the given key exist in options array.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return boolean
      */
@@ -303,8 +280,8 @@ abstract class Generator
     /**
      * Get value from options by given key.
      *
-     * @param  string      $key
-     * @param  string|null $default
+     * @param string $key
+     * @param string|null $default
      *
      * @return string
      */
@@ -320,8 +297,8 @@ abstract class Generator
     /**
      * Helper method for "getOption".
      *
-     * @param  string      $key
-     * @param  string|null $default
+     * @param string $key
+     * @param string|null $default
      *
      * @return string
      */
@@ -333,7 +310,7 @@ abstract class Generator
     /**
      * Handle call to __get method.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return string|mixed
      */
